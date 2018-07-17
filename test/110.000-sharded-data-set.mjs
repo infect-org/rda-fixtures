@@ -1,6 +1,6 @@
 'use strict';
 
-import {DataSet} from '../';
+import {ShardedDataSet} from '../';
 import section from 'section-tests';
 import assert from 'assert';
 import log from 'ee-log';
@@ -9,7 +9,7 @@ import {ServiceManager} from 'rda-service';
 
 
 
-section('Data Set', (section) => {
+section('Sharded Data Set', (section) => {
     let sm;
 
     section.setup(async () => {
@@ -23,9 +23,11 @@ section('Data Set', (section) => {
 
 
 
-    section.test('Create a new data set', async () => {
-        const dataSet = new DataSet();
+    section.test('Create a new sharded data set', async () => {
+        const dataSet = new ShardedDataSet();
         const name = await dataSet.create();
+
+        //log(name);
     });
 
 

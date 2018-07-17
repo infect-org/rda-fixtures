@@ -1,10 +1,10 @@
 {
   "name": "rda-fixtures",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Fixtures for testing RDA",
   "main": "index.mjs",
   "scripts": {
-    "test": "node --experimental-modules ./node_modules/.bin/section ./test/*.mjs --dev --subenv-testing --log-level=error+ --log-module=*"
+    "test": "node --no-warnings --experimental-modules ./node_modules/.bin/section ./test/*.mjs --dev --subenv-testing --log-level=error+ --log-module=*"
   },
   "repository": {
     "type": "git",

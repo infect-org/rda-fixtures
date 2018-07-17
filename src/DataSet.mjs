@@ -18,9 +18,10 @@ export default class DataSet {
 
     async create({
         name = 'data-set-'+Math.round(Math.random()*1000000),
-        length = 10000,
+        length = 1000,
     } = {}) {
-        const storageHost = await this.client.resolve('infect-rda-sample-storage');
+
+        const storageHost = await this.client.resolve('infect-rda-sample-storage'); 
 
         // create a new data set & version
         const versionId = await this.createVersion({
