@@ -1,10 +1,8 @@
-'use strict';
-
-import {DataSet} from '../';
+import { DataSet } from '../';
 import section from 'section-tests';
 import assert from 'assert';
 import log from 'ee-log';
-import {ServiceManager} from 'rda-service';
+import ServiceManager from '@infect/rda-service-manager';
 
 
 

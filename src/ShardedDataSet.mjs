@@ -1,19 +1,13 @@
-'use-strict';
-
-
-import superagent from 'superagent';
+import HTTP2Client from '@distributed-systems/http2-client';
+import RegistryClient from '@infect/rda-service-registry-client';
 import DataSet from './DataSet';
-import RegistryClient from 'rda-service-registry/src/RegistryClient';
 
 
 export default class ShardedDataSet {
 
     constructor(registryHost = 'http://l.dns.porn:9000') {
         this.registryHost = registryHost;
-
-        this.client = new RegistryClient({
-            registryHost,
-        });
+        this.client = new RegistryClient(registryHost);
     }
 
 
@@ -23,6 +17,7 @@ export default class ShardedDataSet {
         name = 'shard-'+Math.round(Math.random()*1000000),
         dataSetLength = 1000,
     } = {}) {
+        const client = new HTTP2Client();
 
         // get a data set
         this.dataSet = new DataSet(this.registryHost);
@@ -35,11 +30,12 @@ export default class ShardedDataSet {
 
         // create shard on the data set
         const storageHost = await this.client.resolve('infect-rda-sample-storage');
-        const response = await superagent.post(`${storageHost}/infect-rda-sample-storage.shard`).ok(res => res.status === 201).send({
+        const response = await client.post(`${storageHost}/infect-rda-sample-storage.shard`).expect(201).send({
             dataSet: this.dataSetId,
             shards: [name]
         });
 
+        await client.end();
 
         return name;
     }
