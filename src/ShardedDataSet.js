@@ -1,6 +1,6 @@
 import HTTP2Client from '@distributed-systems/http2-client';
 import RegistryClient from '@infect/rda-service-registry-client';
-import DataSet from './DataSet';
+import DataSet from './DataSet.js';
 
 
 export default class ShardedDataSet {
