@@ -15,7 +15,7 @@ export default class ShardedDataSet {
 
     async create({
         name = 'shard-'+Math.round(Math.random()*1000000),
-        dataSetLength = 1000,
+        dataSetLength = 100,
     } = {}) {
         const client = new HTTP2Client();
 

@@ -13,7 +13,7 @@ export default class DataSet {
 
     async create({
         name = 'data-set-'+Math.round(Math.random()*1000000),
-        length = 1000,
+        length = 100,
     } = {}) {
         const client = new HTTP2Client();
 
@@ -41,6 +41,16 @@ export default class DataSet {
             status: 'active'
         }).catch(console.log);
 
+
+        await client.post(`${storageHost}/infect-rda-sample-storage.source-code-loader`)
+            .expect(201)
+            .send();
+
+        await client.patch(`${storageHost}/infect-rda-sample-storage.source-code-loader/${name}`)
+            .expect(200)
+            .send();
+
+
         await client.end();
 
         return name;
@@ -49,17 +59,19 @@ export default class DataSet {
 
 
 
-
     createRecord() {
         return {
-            bacteriumId: Math.round(Math.random()*50),
-            antibioticId: Math.round(Math.random()*50),
-            ageGroupId: Math.round(Math.random()*10),
+            animalId: Math.round(Math.random()*50),
+            countryId: Math.round(Math.random()*50),
+            microorganismId: Math.round(Math.random()*50),
+            compoundSubstanceId: Math.round(Math.random()*50),
+            patientAgeRangeFrom: Math.round(Math.random()*1000),
+            patientAgeRangeTo: Math.round(Math.random()*2000)+1000,
             hospitalStatusId: Math.round(Math.random()*3),
             regionId: Math.round(Math.random()*10),
             sampleDate: new Date().toISOString(),
-            resistance: Math.round(Math.random()*2),
-            sampleId: 'sample-id-'+Math.round(Math.random()*100000000000000000),
+            resistanceQualitative: 'ris'.substr(Math.round(Math.random()*2), 1),
+            uniqueIdentifier: 'sample-id-'+Math.round(Math.random()*100000000000000000),
         };
     }
 

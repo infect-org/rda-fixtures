@@ -1,8 +1,11 @@
-
-import DataSet from './src/DataSet.js';
+import AnresisTestData from './src/AnresisTestData.js';
 import ShardedDataSet from './src/ShardedDataSet.js';
+import DataSet from './src/DataSet.js';
+
+
 
 export {
-    DataSet,
+    AnresisTestData,
     ShardedDataSet,
+    DataSet,
 }
