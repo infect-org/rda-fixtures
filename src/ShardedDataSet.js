@@ -8,6 +8,7 @@ export default class ShardedDataSet {
     constructor(registryHost = 'http://l.dns.porn:9000') {
         this.registryHost = registryHost;
         this.client = new RegistryClient(registryHost);
+        this.storageServiceName = 'infect-rda-sample-storage';
     }
 
 
@@ -29,8 +30,8 @@ export default class ShardedDataSet {
 
 
         // create shard on the data set
-        const storageHost = await this.client.resolve('infect-rda-sample-storage');
-        const response = await client.post(`${storageHost}/infect-rda-sample-storage.shard`).expect(201).send({
+        const storageHost = await this.client.resolve(this.storageServiceName);
+        const response = await client.post(`${storageHost}/${this.storageServiceName}.shard`).expect(201).send({
             dataSet: this.dataSetId,
             shards: [name]
         });

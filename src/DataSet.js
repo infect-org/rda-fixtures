@@ -6,6 +6,7 @@ export default class DataSet {
 
     constructor(registryHost = 'http://l.dns.porn:9000') {
         this.client = new RegistryClient(registryHost);
+        this.storageServiceName = 'infect-rda-sample-storage';
     }
 
 
@@ -17,7 +18,7 @@ export default class DataSet {
     } = {}) {
         const client = new HTTP2Client();
 
-        const storageHost = await this.client.resolve('infect-rda-sample-storage'); 
+        const storageHost = await this.client.resolve(this.storageServiceName); 
 
         // create a new data set & version
         const versionId = await this.createVersion({
@@ -28,7 +29,7 @@ export default class DataSet {
 
 
         // write data
-        await client.post(`${storageHost}/infect-rda-sample-storage.data`)
+        await client.post(`${storageHost}/${this.storageServiceName}.data`)
             .expect(201)
             .send({
                 dataVersionId: versionId,
@@ -37,16 +38,16 @@ export default class DataSet {
 
 
         // mark version as ready
-        await client.patch(`${storageHost}/infect-rda-sample-storage.data-version/${versionId}`).expect(200).send({
+        await client.patch(`${storageHost}/${this.storageServiceName}.data-version/${versionId}`).expect(200).send({
             status: 'active'
         }).catch(console.log);
 
 
-        await client.post(`${storageHost}/infect-rda-sample-storage.source-code-loader`)
+        await client.post(`${storageHost}/${this.storageServiceName}.source-code-loader`)
             .expect(201)
             .send();
 
-        await client.patch(`${storageHost}/infect-rda-sample-storage.source-code-loader/${name}`)
+        await client.patch(`${storageHost}/${this.storageServiceName}.source-code-loader/${name}`)
             .expect(200)
             .send();
 
@@ -84,7 +85,7 @@ export default class DataSet {
         dataSetName,
         client,
     }) {
-        const response = await client.post(`${storageHost}/infect-rda-sample-storage.data-version`).expect(201).send({
+        const response = await client.post(`${storageHost}/${this.storageServiceName}.data-version`).expect(201).send({
             identifier: name,
             dataSet: dataSetName,
             dataSetFields: ['bacteriumId', 'antibioticId', 'ageGroupId', 'regionId', 'sampleDate', 'resistance']
