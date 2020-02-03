@@ -1,6 +1,6 @@
 {
   "name": "@infect/rda-fixtures",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "Fixtures for testing RDA",
   "main": "index.js",
   "scripts": {
