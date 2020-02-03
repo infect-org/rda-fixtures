@@ -73,6 +73,7 @@ export default class DataSet {
             sampleDate: new Date().toISOString(),
             resistanceQualitative: 'ris'.substr(Math.round(Math.random()*2), 1),
             uniqueIdentifier: 'sample-id-'+Math.round(Math.random()*100000000000000000),
+            dataVersionStatusIdentifier: 'active',
         };
     }
 
